@@ -1,0 +1,30 @@
+[package]
+name = "wscat-rust"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "server"
+path = "src/server/main.rs"
+
+[[bin]]
+name = "wscat-add"
+path = "src/client/add.rs"
+
+[[bin]]
+name = "wscat-game"
+path = "src/client/game.rs"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+axum = { version = "0.7", features = ["ws"] }
+tokio-tungstenite = "0.21"
+prost = "0.12"
+rand = "0.8"
+futures-util = "0.3"
+reqwest = "0.11"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["cors"] }
+
+[build-dependencies]
+prost-build = "0.12"
