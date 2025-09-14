@@ -14,10 +14,12 @@ dependencies = [
   "uvicorn[standard]",
   "requests",
   "protobuf",
+  "websockets",
 ]
 
 [project.scripts]
 wscat-add = "wscat.client.add:main"
+wscat-game = "wscat.client.game:main"
 
 [tool.hatch.build.hooks.custom]
 path = "tools/build_protos.py" 

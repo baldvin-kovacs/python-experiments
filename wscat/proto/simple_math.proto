@@ -10,3 +10,19 @@ message AddRequest {
 message AddResponse {
   int32 result = 1;
 }
+
+message MathProblem {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message MathSolution {
+  int32 answer = 1;
+}
+
+message MathResponse {
+  oneof response_type {
+    string congratulations = 1;
+    MathProblem new_problem = 2;
+  }
+}
