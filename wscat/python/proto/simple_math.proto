@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package wscat_simple_math;
+
+message AddRequest {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message AddResponse {
+  int32 result = 1;
+}

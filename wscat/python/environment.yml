@@ -1,0 +1,16 @@
+name: wscat
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+
+  - protobuf
+  - libprotobuf
+
+  - fastapi
+  - uvicorn
+  - requests
+
+  - uv
+  - hatchling
+  - doit

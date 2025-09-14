@@ -1,0 +1,6 @@
+*_pb2.py
+*_pb2.pyi
+/dist
+uv.lock
+__pycache__
+.doit.*

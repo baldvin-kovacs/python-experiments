@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wscat"
+version = "0.1.0"
+description = "A WebSocket testing tool"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "requests",
+  "protobuf",
+]
+
+[project.scripts]
+wscat-add = "wscat.client.add:main"
+
+[tool.hatch.build.hooks.custom]
+path = "tools/build_protos.py" 
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wscat"]
