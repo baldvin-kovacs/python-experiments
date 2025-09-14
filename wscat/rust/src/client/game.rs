@@ -23,7 +23,7 @@ async fn handle_initial_problem(
     
     let solution = MathSolution { answer };
     let solution_bytes = solution.encode_to_vec();
-    ws_sender.send(WsMessage::Binary(solution_bytes)).await?;
+    ws_sender.send(WsMessage::Binary(solution_bytes.into())).await?;
     
     Ok(())
 }
@@ -54,7 +54,7 @@ async fn handle_response(
             
             let solution = MathSolution { answer };
             let solution_bytes = solution.encode_to_vec();
-            ws_sender.send(WsMessage::Binary(solution_bytes)).await?;
+            ws_sender.send(WsMessage::Binary(solution_bytes.into())).await?;
             
             Ok(false) // Continue game
         }

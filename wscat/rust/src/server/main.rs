@@ -11,10 +11,10 @@ use rand::Rng;
 use wscat_rust::proto::{AddRequest, AddResponse, MathProblem, MathResponse, MathSolution};
 
 fn generate_math_problem() -> MathProblem {
-    let mut rng = rand::thread_rng();
+    let mut rng = rand::rng();
     MathProblem {
-        a: rng.gen_range(1..20),
-        b: rng.gen_range(1..20),
+        a: rng.random_range(1..20),
+        b: rng.random_range(1..20),
     }
 }
 
@@ -45,7 +45,7 @@ async fn handle_socket(mut socket: WebSocket) {
     println!("Sending problem: {} + {}", problem.a, problem.b);
     let problem_bytes = problem.encode_to_vec();
     
-    if socket.send(axum::extract::ws::Message::Binary(problem_bytes)).await.is_err() {
+    if socket.send(axum::extract::ws::Message::Binary(problem_bytes.into())).await.is_err() {
         println!("Failed to send initial problem");
         return;
     }
@@ -74,7 +74,7 @@ async fn handle_socket(mut socket: WebSocket) {
                     };
                     let response_bytes = response.encode_to_vec();
                     
-                    if socket.send(axum::extract::ws::Message::Binary(response_bytes)).await.is_err() {
+                    if socket.send(axum::extract::ws::Message::Binary(response_bytes.into())).await.is_err() {
                         println!("Failed to send congratulations");
                         break;
                     }
@@ -91,7 +91,7 @@ async fn handle_socket(mut socket: WebSocket) {
                     };
                     let response_bytes = response.encode_to_vec();
                     
-                    if socket.send(axum::extract::ws::Message::Binary(response_bytes)).await.is_err() {
+                    if socket.send(axum::extract::ws::Message::Binary(response_bytes.into())).await.is_err() {
                         println!("Failed to send new problem");
                         break;
                     }
