@@ -7,13 +7,13 @@ def task_build_protos():
         'actions': [
             [
                 'protoc',
-                '-I=proto',
+                '-I=../proto',
                 '--python_out=src/wscat/server',
                 '--pyi_out=src/wscat/server', 
-                'proto/simple_math.proto'
+                '../proto/simple_math.proto'
             ]
         ],
-        'file_dep': ['proto/simple_math.proto'],
+        'file_dep': ['../proto/simple_math.proto'],
         'targets': ['src/wscat/server/simple_math_pb2.py', 'src/wscat/server/simple_math_pb2.pyi'],
         'clean': True,
     }
