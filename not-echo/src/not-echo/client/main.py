@@ -9,4 +9,3 @@ async def send_chars()
     async with websockets.connect(uri) as websocket:
      print('[CLIENT] Connected: Start typing...')
      fd = sys.stdin.fileno()
-     
