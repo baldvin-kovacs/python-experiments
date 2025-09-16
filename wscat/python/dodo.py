@@ -25,7 +25,7 @@ def task_run_server():
         'actions': [
             [
                 'uvicorn', 
-                'wscat.server.main:app', 
+                'wscat.server.main:c', 
                 '--reload', 
                 '--app-dir', 
                 'src'
