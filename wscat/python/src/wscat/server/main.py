@@ -39,6 +39,7 @@ def generate_math_problem():
 
 @app.websocket("/math")
 async def websocket_math_endpoint(websocket: WebSocket):
+    #print('yyy', flush=True)
     await websocket.accept()
     logger.info("WebSocket connection established for math problems")
     
