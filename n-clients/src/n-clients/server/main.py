@@ -37,6 +37,3 @@ async def websocket_endpoint(websocket: WebSocket):
                 print(char,end='',flush=True)
     except:
         print("[Server]: Client disconnected")
-
-#option 1: add global service 
-#client should introduce itself + register func should then take a name 
