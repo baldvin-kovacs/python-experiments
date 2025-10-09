@@ -1,0 +1,18 @@
+name: n-clients
+channels:
+  - conda-forge
+dependencies:
+  - python 3.11
+  
+  - blessed
+  - fastapi
+  - uvicorn
+  - requests
+  - websockets
+ 
+  - uv
+  - hatchling
+  - doit
+ 
+  - protobuf
+  - libprotobuf
