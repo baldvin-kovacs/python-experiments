@@ -92,7 +92,8 @@ class ChatUIList(Gtk.ApplicationWindow):
         # Scrolled window for past messages ListView
         self.past_scroll = Gtk.ScrolledWindow()
         self.past_scroll.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-        self.past_scroll.set_size_request(-1, 200)
+        self.past_scroll.set_vexpand(True)
+        self.past_scroll.set_hexpand(True)
 
         # Create ListView with custom factory
         self.message_list_view = Gtk.ListView()
@@ -169,6 +170,11 @@ class ChatUIList(Gtk.ApplicationWindow):
         focus_controller.connect("enter", self.on_input_focus_in)
         focus_controller.connect("leave", self.on_input_focus_out)
         self.message_text_view.add_controller(focus_controller)
+
+        # Add keyboard controller for Enter/Shift+Enter handling
+        key_controller = Gtk.EventControllerKey()
+        key_controller.connect("key-pressed", self.on_key_pressed)
+        self.message_text_view.add_controller(key_controller)
 
         input_scroll.set_child(self.message_text_view)
         input_container.append(input_scroll)
@@ -384,6 +390,22 @@ class ChatUIList(Gtk.ApplicationWindow):
         ).strip()
         if not text:
             self.message_buffer.set_text("Type your message here...")
+
+    def on_key_pressed(self, controller: Gtk.EventControllerKey, keyval: int, keycode: int, state: int) -> bool:
+        """Handle key press events in the input text view."""
+        from gi.repository import Gdk
+        
+        # Check if Enter was pressed
+        if keyval == Gdk.KEY_Return or keyval == Gdk.KEY_KP_Enter:
+            # If Shift is held down, allow normal newline behavior
+            if state & Gdk.ModifierType.SHIFT_MASK:
+                return False  # Let the default handler insert newline
+            else:
+                # Send the message
+                self.on_send_message()
+                return True  # Consume the event
+        
+        return False  # Let other keys be handled normally
 
     def on_send_message(self, widget: Optional[Gtk.Widget] = None) -> None:
         """Handle sending a message."""
